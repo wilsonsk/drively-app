@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Company Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-card>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <h1>Drively</h1>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+      <ion-card-content>
+        <ion-row padding-bottom>
+          <ion-col>
+              <p>Welcome, please enter your company code to continue to Driver Login.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row padding-verticle>
+          <ion-col>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+              <ion-list>
+                <ion-item>
+                  <ion-label floating>Company Name</ion-label>
+                  <ion-input type="text" name="company" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label floating>Company Code</ion-label>
+                  <ion-input type="password" name="companyCode" ngModel required></ion-input>
+                </ion-item>
+              </ion-list>
+              <button type="submit" ion-button block [disabled]="!f.valid">Submit Code</button>
+            </form >
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>
