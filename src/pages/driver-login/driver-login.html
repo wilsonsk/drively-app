@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>Driver Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-card>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <h1>{{ authService.auth.company }}</h1>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+      <ion-card-content>
+        <ion-row padding-bottom>
+          <ion-col>
+              <p>Welcome back, please enter your company code to continue to Driver Login.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row padding-verticle>
+          <ion-col>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+              <ion-list>
+                <ion-item>
+                  <ion-label floating>Driver User Name</ion-label>
+                  <ion-input type="text" name="driver" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label floating>Password</ion-label>
+                  <ion-input type="password" name="password" ngModel required></ion-input>
+                </ion-item>
+              </ion-list>
+              <button type="submit" ion-button block [disabled]="!f.valid">Login</button>
+            </form >
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>
