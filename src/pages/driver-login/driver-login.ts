@@ -26,7 +26,7 @@ export class DriverLoginPage {
 
   onSubmit(form: NgForm) {
     const loading = this.loadingCtrl.create({
-      content: 'Checking your company code...'
+      content: 'Checking your driver credentials...'
     });
     loading.present();
 
