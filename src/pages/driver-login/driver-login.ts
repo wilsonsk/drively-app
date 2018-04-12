@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NgForm } from '@angular/forms';
+
 
 import { AuthService } from '../../services/auth.service';
 
@@ -31,7 +33,7 @@ export class DriverLoginPage {
     this.authService.driverLogin(form.value.driver, form.value.password, this.token)
       .subscribe((data) => {
         if(data) {
-          console.log('driver login: ' + JSON.stringify(data));
+          console.log('driver login response: ' + JSON.stringify(data));
           loading.dismiss();
         } else {
           loading.dismiss();

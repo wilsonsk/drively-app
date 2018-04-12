@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpOptions } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import { Storage } from '@ionic/storage';
@@ -22,27 +22,26 @@ export class AuthService {
     this.auth.code = code;
   }
 
+  isTokenExpired(token: string) {
+    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/isTokenExpired' + '/' + token);
+  }
+
   checkCompanyCode(company: string, code: string) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
-      })
-    };
     return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/checkCompanyCode' + '/' + company + '/' + code);
   }
 
   driverLogin(driver, password, token) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .append('Authorization', token);
+    const options = {
+      headers: headers
     };
-    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverLogin' + '/' + driver + '/' + password, {}, httpOptions);
+    // return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverLogin' + '/' + driver + '/' + password);
+    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverLogin' + '/' + driver + '/' + password, options);
 
   }
 
-  saveTokenToDeviceStorage(token: string) {
+  saveTokenToDeviceStorage(token: any) {
     this.storage.set('drivelyToken', token)
       .then(() => {
         console.log('save successful');
@@ -60,6 +59,7 @@ export class AuthService {
       })
       .catch((error) => {
         console.log('failed to fetch token');
+        return 0;
       });
   }
 

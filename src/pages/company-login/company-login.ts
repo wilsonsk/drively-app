@@ -12,9 +12,29 @@ import { DriverLoginPage } from '../driver-login/driver-login';
 })
 export class CompanyLoginPage {
   hasToken = false;
+  token: string;
 
   constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService,
               private alertCtrl: AlertController) {
+                this.onLoadToken();
+  }
+
+  onLoadToken() {
+    this.authService.fetchTokenFromDeviceStorage()
+      .then((token) => {
+          this.authService.isTokenExpired(token)
+            .subscribe((expired) => {
+              if(expired) {
+                const a = this.alertCtrl.create({
+                  title: 'Company Authentication Token is Expired',
+                  buttons: ['OK']
+                });
+                a.present();
+              } else {
+                this.navCtrl.setRoot(DriverLoginPage);
+              }
+            });
+      });
   }
 
   onSubmit(form: NgForm) {
@@ -25,7 +45,7 @@ export class CompanyLoginPage {
 
     this.authService.checkCompanyCode(form.value.company, form.value.companyCode)
       .subscribe((data) => {
-        console.log(data);
+        console.log('checkCompanyCode: ' + data);
         if(data) {
           loading.dismiss();
           this.authService.auth.isAuthenticated = true;
@@ -35,7 +55,7 @@ export class CompanyLoginPage {
         } else {
           loading.dismiss();
           const a = this.alertCtrl.create({
-            title: 'Company Code failed',
+            title: 'Company Code failed or is expired',
             buttons: ['OK']
           });
           a.present();
