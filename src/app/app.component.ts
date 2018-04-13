@@ -3,10 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { Storage } from '@ionic/storage';
-import { File } from '@ionic-native/file';
-
-
 import { CompanyLoginPage } from '../pages/company-login/company-login';
 import { DriverLoginPage } from '../pages/driver-login/driver-login';
 
@@ -53,5 +49,10 @@ export class MyApp {
 
   openPage(page) {
     this.nav.setRoot(page);
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.nav.setRoot(CompanyLoginPage);
   }
 }

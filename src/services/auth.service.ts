@@ -13,7 +13,6 @@ export class AuthService {
     'isAuthenticated': false
   }
 
-
   constructor(private http: HttpClient, private storage: Storage, private file: File) {
   }
 
@@ -36,9 +35,7 @@ export class AuthService {
     const options = {
       headers: headers
     };
-    // return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverLogin' + '/' + driver + '/' + password);
     return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverLogin' + '/' + driver + '/' + password, options);
-
   }
 
   saveTokenToDeviceStorage(token: any) {
@@ -62,5 +59,10 @@ export class AuthService {
         return 0;
       });
   }
+
+  logout() {
+    this.auth.isAuthenticated = false;
+  }
+
 
 }

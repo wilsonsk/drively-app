@@ -48,7 +48,6 @@ export class CompanyLoginPage {
         console.log('checkCompanyCode: ' + data);
         if(data) {
           loading.dismiss();
-          this.authService.auth.isAuthenticated = true;
           this.authService.setAuth(form.value.company, form.value.companyCode);
           this.authService.saveTokenToDeviceStorage(data);
           this.navCtrl.setRoot(DriverLoginPage);

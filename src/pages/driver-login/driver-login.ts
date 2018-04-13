@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
+import { ClockInPage } from '../clock-in/clock-in';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -34,7 +35,9 @@ export class DriverLoginPage {
       .subscribe((data) => {
         if(data) {
           console.log('driver login response: ' + JSON.stringify(data));
+          this.authService.auth.isAuthenticated = true;
           loading.dismiss();
+          this.navCtrl.setRoot(ClockInPage, {driver:data});
         } else {
           loading.dismiss();
           const a = this.alertCtrl.create({

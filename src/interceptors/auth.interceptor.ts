@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     //   console.log('authReq POST sent: ' + JSON.stringify(authReq));
     //   return next.handle(authReq);
     // } else {
-    console.log('request: ' + JSON.stringify(req.headers));
+    // console.log('request: ' + JSON.stringify(req.headers));
       return next.handle(req);
     // }
 
