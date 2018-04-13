@@ -1,28 +1,36 @@
 <ion-header>
   <ion-navbar>
-    <ion-buttons>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title text-center>Clock In</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Clock In</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
-    <ion-row text-center>
-      <ion-col>
-        <h1>Get Started</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button block (click)="onClockIn()">
-          Clock In
-        </button>
-      </ion-col>
-    </ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <h1>{{ company }}</h1>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+      <ion-card-content>
+        <ion-row padding-bottom>
+          <ion-col>
+              <p>Welcome back, {{ driver }}.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row padding-verticle>
+          <ion-col>
+            <button ion-button block color="secondary" (click)="onClockIn()">
+              Clock In
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
   </ion-grid>
-
 </ion-content>

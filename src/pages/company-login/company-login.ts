@@ -11,7 +11,6 @@ import { DriverLoginPage } from '../driver-login/driver-login';
   templateUrl: 'company-login.html'
 })
 export class CompanyLoginPage {
-  hasToken = false;
   token: string;
 
   constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private authService: AuthService,
@@ -31,7 +30,8 @@ export class CompanyLoginPage {
                 });
                 a.present();
               } else {
-                this.navCtrl.setRoot(DriverLoginPage);
+                this.token = token;
+                this.getCompanyFromToken();
               }
             });
       });
@@ -58,6 +58,18 @@ export class CompanyLoginPage {
             buttons: ['OK']
           });
           a.present();
+        }
+      });
+  }
+
+  getCompanyFromToken() {
+    this.authService.fetchCompanyFromToken(this.token)
+      .subscribe((company) => {
+        if(company) {
+          this.authService.setAuth(company.name, company.code);
+          this.navCtrl.setRoot(DriverLoginPage);
+        } else {
+          console.log('failed to fetch company data from token');
         }
       });
   }

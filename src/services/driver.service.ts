@@ -8,16 +8,18 @@ import { Driver } from '../models/driver.interface';
 @Injectable()
 export class DriverService {
   username: string;
-  company_fk: string;
+  company: string;
   schedule: any;
+  isClockedIn = false;
+  isVehicleInspected = false;
 
 
   constructor(private http: HttpClient) {
   }
 
-  initDriver(username: string, company_fk: string) {
+  initDriver(username: string, company: string) {
     this.username = username;
-    this.company_fk = company_fk;
+    this.company = company;
   }
 
   clockIn(token: string) {

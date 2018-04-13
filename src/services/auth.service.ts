@@ -22,7 +22,12 @@ export class AuthService {
   }
 
   isTokenExpired(token: string) {
-    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/isTokenExpired' + '/' + token);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .append('Authorization', token);
+    const options = {
+      headers: headers
+    };
+    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/isTokenExpired', options);
   }
 
   checkCompanyCode(company: string, code: string) {
@@ -58,6 +63,15 @@ export class AuthService {
         console.log('failed to fetch token');
         return 0;
       });
+  }
+
+  fetchCompanyFromToken(token: string) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .append('Authorization', token);
+    const options = {
+      headers: headers
+    };
+    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/getCompanyFromToken', options);
   }
 
   logout() {
