@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { File, Entry, FileError } from '@ionic-native/file';
 
+import { CompanyLoginPage } from '../company-login/company-login';
+
 import { AuthService } from'../../services/auth.service';
 import { DriverService } from '../../services/driver.service';
 
@@ -58,6 +60,11 @@ export class ClockInPage {
         a.present();
       }
     });
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.navCtrl.setRoot(CompanyLoginPage);
   }
 
 }

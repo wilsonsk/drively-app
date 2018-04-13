@@ -28,7 +28,9 @@ export class DriverService {
     const options = {
       headers: headers
     };
-    return this.http.get('http://ua/TEST-drively-api/sites/_admin/api/v1/driverClockIn' + '/' + this.username, options);
+    return this.http.post('http://ua/TEST-drively-api/sites/_admin/api/v1/driverClockIn' + '/' + this.username, {
+      clockIn: 'some time value',
+    }, options);
   }
 
 }

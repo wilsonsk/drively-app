@@ -21,10 +21,18 @@ export class VehicleInspectionPage {
   company: string;
   imageUrl = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private inspectionService: InspectionService,
               private driverService: DriverService, private alertCtrl: AlertController, private loadingCtrl: LoadingController,
-              private camera: Camera, private toastCtrl: ToastController) {
+              private camera: Camera, private toastCtrl: ToastController, private file: File) {
     this.initDriver();
+    this.onLoadToken();
+  }
+
+  onLoadToken() {
+    this.authService.fetchTokenFromDeviceStorage()
+      .then((token) => {
+        this.token = token;
+      });
   }
 
   initDriver() {
@@ -74,7 +82,14 @@ export class VehicleInspectionPage {
     }
 
     onSubmit(form: NgForm) {
-      console.log(form.value);
+      this.inspectionService.submitInspection(form, this.token)
+        .subscribe((data) => {
+          if(data) {
+            console.log(data);
+          } else {
+            console.log('error');
+          }
+        });
     }
 
 }
