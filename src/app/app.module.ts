@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { File } from '@ionic-native/file';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 // Pages
 import { MyApp } from './app.component';
@@ -14,10 +15,16 @@ import { DriverLoginPage } from '../pages/driver-login/driver-login';
 import { ClockInPage } from '../pages/clock-in/clock-in';
 import { VehicleInspectionPage } from '../pages/vehicle-inspection/vehicle-inspection';
 
+import { TripsPage } from '../pages/schedule/trips/trips';
+import { TripNotesPage } from '../pages/schedule/trip-notes/trip-notes';
+import { TripPage } from '../pages/schedule/trip/trip';
+import { MapPage } from '../pages/schedule/map/map';
+
 // Services
 import { AuthService } from '../services/auth.service';
 import { DriverService } from '../services/driver.service';
 import { InspectionService } from '../services/inspection.service';
+import { ScheduleService } from '../services/schedule.service';
 
 // Interceptor
 import { AuthInterceptor } from '../interceptors/auth.interceptor';
@@ -31,7 +38,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CompanyLoginPage,
     DriverLoginPage,
     ClockInPage,
-    VehicleInspectionPage
+    VehicleInspectionPage,
+    TripsPage,
+    TripNotesPage,
+    TripPage,
+    MapPage,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +56,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CompanyLoginPage,
     DriverLoginPage,
     ClockInPage,
-    VehicleInspectionPage
+    VehicleInspectionPage,
+    TripsPage,
+    TripNotesPage,
+    TripPage,
+    MapPage,
   ],
   providers: [
     StatusBar,
@@ -55,6 +70,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     InspectionService,
     File,
     Camera,
+    FileTransfer,
+    ScheduleService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

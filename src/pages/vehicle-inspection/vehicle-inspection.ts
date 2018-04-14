@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 import { Camera } from '@ionic-native/camera';
@@ -22,7 +22,7 @@ export class VehicleInspectionPage {
   imageUrl = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private inspectionService: InspectionService,
-              private driverService: DriverService, private alertCtrl: AlertController, private loadingCtrl: LoadingController,
+              private driverService: DriverService, private loadingCtrl: LoadingController,
               private camera: Camera, private toastCtrl: ToastController, private file: File) {
     this.initDriver();
     this.onLoadToken();
@@ -86,6 +86,13 @@ export class VehicleInspectionPage {
         .subscribe((data) => {
           if(data) {
             console.log(data);
+            // this.inspectionService.uploadPhoto(this.imageUrl, this.token)
+            //   .then((response) => {
+            //     console.log('img upload successful ' + response);
+            //   })
+            //   .catch((error) => {
+            //     console.log('img upload failed ' + error);
+            //   });
           } else {
             console.log('error');
           }
