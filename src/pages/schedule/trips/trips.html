@@ -1,13 +1,21 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Trips</ion-title>
-  </ion-navbar>
+  <header-menu pageName="Trip"></header-menu>
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row padding>
+      <ion-col offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4>
+        <card-drively-logo></card-drively-logo>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card *ngFor="let trip of trips; let i = index;">
+    <ion-card-title text-center>
+      {{ trip }}
+    </ion-card-title>
+    <ion-card-content>
+      <button ion-button block>Trip Details</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

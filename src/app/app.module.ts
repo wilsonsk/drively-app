@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 // Pages
 import { MyApp } from './app.component';
@@ -19,6 +20,10 @@ import { TripsPage } from '../pages/schedule/trips/trips';
 import { TripNotesPage } from '../pages/schedule/trip-notes/trip-notes';
 import { TripPage } from '../pages/schedule/trip/trip';
 import { MapPage } from '../pages/schedule/map/map';
+
+// Components
+import { HeaderMenuComponent } from '../components/header-menu/header-menu.component';
+import { CardDrivelyLogo } from '../components/card-drively-logo/card-drively-logo.component';
 
 // Services
 import { AuthService } from '../services/auth.service';
@@ -43,6 +48,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TripNotesPage,
     TripPage,
     MapPage,
+    HeaderMenuComponent,
+    CardDrivelyLogo,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +79,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Camera,
     FileTransfer,
     ScheduleService,
+    NativePageTransitions,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

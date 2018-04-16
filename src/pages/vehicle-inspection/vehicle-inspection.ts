@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 import { Camera } from '@ionic-native/camera';
@@ -8,6 +8,8 @@ import { File, Entry, FileError } from '@ionic-native/file';
 import { AuthService } from'../../services/auth.service';
 import { DriverService } from '../../services/driver.service';
 import { InspectionService } from '../../services/inspection.service';
+
+import { TripsPage } from '../schedule/trips/trips';
 
 declare var cordova: any;
 
@@ -22,7 +24,7 @@ export class VehicleInspectionPage {
   imageUrl = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private inspectionService: InspectionService,
-              private driverService: DriverService, private loadingCtrl: LoadingController,
+              private driverService: DriverService, private loadingCtrl: LoadingController, private alertCtrl: AlertController,
               private camera: Camera, private toastCtrl: ToastController, private file: File) {
     this.initDriver();
     this.onLoadToken();
@@ -82,19 +84,35 @@ export class VehicleInspectionPage {
     }
 
     onSubmit(form: NgForm) {
+      const loading = this.loadingCtrl.create({
+        content: 'Submitting your vehicle inspection...'
+      });
+      loading.present();
+
       this.inspectionService.submitInspection(form, this.token)
         .subscribe((data) => {
           if(data) {
-            console.log(data);
+            loading.dismiss();
+            console.log('vehicle inspection submission response data: ' + JSON.stringify(data));
             // this.inspectionService.uploadPhoto(this.imageUrl, this.token)
             //   .then((response) => {
             //     console.log('img upload successful ' + response);
             //   })
             //   .catch((error) => {
             //     console.log('img upload failed ' + error);
+            //     const a = this.alertCtrl.create({
+            //       title: 'Image upload failed',
+            //       buttons: ['OK']
+            //     });
+            //     a.present();
             //   });
+            this.navCtrl.setRoot(TripsPage);
           } else {
-            console.log('error');
+            const a = this.alertCtrl.create({
+              title: 'Vehicle inspection submission error',
+              buttons: ['OK']
+            });
+            a.present();
           }
         });
     }

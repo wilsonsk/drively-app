@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 import { ClockInPage } from '../clock-in/clock-in';
 
@@ -14,7 +15,7 @@ export class DriverLoginPage {
   token: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,
-    private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController, private nativePageTransitions: NativePageTransitions) {
     this.onLoadToken();
   }
 
@@ -48,5 +49,19 @@ export class DriverLoginPage {
         }
       });
   }
+
+  ionViewWillLeave() {
+    const options: NativeTransitionOptions = {
+      direction: 'up',
+      duration: 500,
+      slowdownfactor: 3,
+      slidePixels: 20,
+      iosdelay: 100,
+      androiddelay: 150,
+      fixedPixelsTop: 0,
+      fixedPixelsBottom: 60
+    };
+    this.nativePageTransitions.slide(options);
+   }
 
 }
