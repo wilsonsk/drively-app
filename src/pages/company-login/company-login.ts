@@ -64,7 +64,7 @@ export class CompanyLoginPage {
 
   getCompanyFromToken() {
     this.authService.fetchCompanyFromToken(this.token)
-      .subscribe((company) => {
+      .subscribe((company: any ={}) => {
         if(company) {
           this.authService.setAuth(company.name, company.code);
           this.navCtrl.setRoot(DriverLoginPage);
